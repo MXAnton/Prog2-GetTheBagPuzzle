@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float layDownHeight = 0.4f;
 
+    [Space]
+    [SerializeField]
+    private LayerMask raycastLayerMask;
+
     private Vector2 movementInput = new Vector2(0, 0);
 
     void Start()
@@ -93,11 +97,52 @@ public class PlayerMovement : MonoBehaviour
             _newIsCrouching = false; // Player isnt crouching if laying down
             _newIsLayingDown = !_newIsLayingDown;
         }
+
+        // Check if can stand up from crouch or lay down - if above height as much as needed
+        float _maxPlayerHeight = getHeightAbove() + transform.localScale.y * 2;
+        // Debug.Log("Height above: " + getHeightAbove() + " - Maxplayerheight: " + _maxPlayerHeight);
+        if (_maxPlayerHeight <= crouchHeight * 2) {
+            // Cant crouch, to little space above.
+            _newIsCrouching = false;
+            // Laydown instead
+            _newIsLayingDown = true;
+
+            // Debug.Log("Cant stand up or cruch, only lay down");
+        } 
+        else if (_maxPlayerHeight <= 1 * 2) { // 1 = default player size. Default player height: 1 * 2 = 2
+            // Cant stand up, to little space above.
+            // IF the player doesn't want to lay down
+            //  start crouching to be as tall as possible
+            if (!_newIsLayingDown) {
+                _newIsCrouching = true;
+                _newIsLayingDown = false;
+                
+                // Debug.Log("Cant stand up, cruch or lay down");
+            }
+        }
         
         isCrouching = _newIsCrouching;
         isLayingDown = _newIsLayingDown;
 
         SetPlayerHeight();
+    }
+    private float getHeightAbove() {
+        float _heightAbove = Mathf.Infinity; // Default to unlimited height above player
+
+        RaycastHit hit;
+        Vector3 _rayStartPos = transform.position;
+        _rayStartPos.y += transform.localScale.y * 2; // Start on top of player head
+        Ray upRay = new Ray(_rayStartPos, Vector3.up);
+        // Cast a ray straight upwards.
+        if (Physics.Raycast(upRay, out hit))
+        {
+            // the height measured by the raycast distance.
+            _heightAbove = hit.distance;
+            // Debug.Log("Height above: " + _heightAbove);
+            Debug.DrawRay(_rayStartPos, Vector3.up * _heightAbove, Color.green, 0.1f);
+        }
+
+        return _heightAbove;
     }
     private void SetPlayerHeight() {
         Vector3 _newSize = new Vector3(transform.localScale.x, 1, transform.localScale.z); // 1 default height
