@@ -6,6 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
 
+    [Header("Player jump vars")]
+    [SerializeField]
+    private float jumpPower = 10f;
+    public bool isGrounded = false;
+
     [Header("Player movement speeds")]
     [SerializeField]
     private float movementSpeed = 90f;
@@ -27,10 +32,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float layDownHeight = 0.4f;
 
-    [Space]
-    [SerializeField]
-    private LayerMask raycastLayerMask;
-
     private Vector2 movementInput = new Vector2(0, 0);
 
     void Start()
@@ -42,10 +43,16 @@ public class PlayerMovement : MonoBehaviour
         movementInput.x = Input.GetAxis("Horizontal");
         movementInput.y = Input.GetAxis("Vertical");
         movementInput = Vector2.ClampMagnitude(movementInput, 1);
-
-        GetPlayerCrouchLayingState();
         
         Move();
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            TryJump();
+        }
+    }
+
+    private void Update() {
+        GetPlayerCrouchLayingState();
     }
 
     private void Move() {
@@ -63,7 +70,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _moveDir.y = rb.velocity.y; // Don't change gravity or jump force
+
         rb.velocity = _moveDir;
+    }
+
+    private void TryJump() {
+        if (isGrounded) {
+            rb.velocity = new Vector3(rb.velocity.x, jumpPower, rb.velocity.z);
+        }
     }
 
     private void GetPlayerCrouchLayingState() {
@@ -139,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             // the height measured by the raycast distance.
             _heightAbove = hit.distance;
             // Debug.Log("Height above: " + _heightAbove);
-            Debug.DrawRay(_rayStartPos, Vector3.up * _heightAbove, Color.green, 0.1f);
+            // Debug.DrawRay(_rayStartPos, Vector3.up * _heightAbove, Color.green, 0.1f);
         }
 
         return _heightAbove;
@@ -156,4 +170,29 @@ public class PlayerMovement : MonoBehaviour
 
         transform.localScale = _newSize;
     }
+
+
+    // Check if grounded with downwards raycast - old
+    /*
+    private bool CheckIfGroundedDownRay() {
+        bool _isGrounded = false; // Default to false
+
+        RaycastHit hit;
+        Vector3 _rayStartPos = transform.position; // Starts on bottom of player
+        _rayStartPos.y += 0.1f;
+        Ray downRay = new Ray(_rayStartPos, -Vector3.up);
+
+        // Cast a ray straight downwards.
+        // If distance to ground less than 0.1f
+        if (Physics.Raycast(downRay, out hit, 5))
+        {
+            if (hit.distance < 0.3f) {
+                _isGrounded = true;
+            }
+            Debug.DrawRay(_rayStartPos, -Vector3.up * hit.distance, Color.blue, 0.1f);
+        }
+
+        return _isGrounded;
+    }
+    */
 }
