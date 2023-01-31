@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private float crouchMovementSpeedMultiplier = 0.6f;
     [SerializeField]
     private float layDownMovementSpeedMultiplier = 0.3f;
+    [Space]
+    [SerializeField]
+    private float inAirMovementMultiplier = 0.8f;
 
     [Header("Player states")]
     [SerializeField]
@@ -62,29 +65,34 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Move() {
-        Vector3 _moveDir = (movementInput.y * transform.forward) + (movementInput.x * transform.right);
-        _moveDir *= movementSpeed * Time.fixedDeltaTime;
+        Vector3 _newVelocity = (movementInput.y * transform.forward) + (movementInput.x * transform.right);
+        _newVelocity *= movementSpeed * Time.fixedDeltaTime;
 
         float _jumpPower = jumpPower;
 
         if (Input.GetKey(KeyCode.LeftShift)) {
-            _moveDir *= runMultiplier;
+            _newVelocity *= runMultiplier;
         }
         if (isCrouching) {
-            _moveDir *= crouchMovementSpeedMultiplier;
+            _newVelocity *= crouchMovementSpeedMultiplier;
             _jumpPower *= crouchMovementSpeedMultiplier; // Jump lower on crouch
         }
         if (isLayingDown) {
-            _moveDir *= layDownMovementSpeedMultiplier;
+            _newVelocity *= layDownMovementSpeedMultiplier;
             _jumpPower *= layDownMovementSpeedMultiplier; // Jump even lower on laydown
         }
 
-        _moveDir.y = rb.velocity.y; // Don't change gravity or jump force
-        if (playerJump) {
-            _moveDir.y = _jumpPower; // Set y velocity to modified _jumpPower
+        if (!isGrounded) {
+            // Add minimal movement when player in air
+            _newVelocity *= inAirMovementMultiplier;
         }
 
-        rb.velocity = _moveDir;
+        _newVelocity.y = rb.velocity.y; // Don't change gravity or jump force
+        if (playerJump) {
+            _newVelocity.y = _jumpPower; // Set y velocity to modified _jumpPower
+        }
+
+        rb.velocity = _newVelocity;
 
         playerJump = false;
     }
