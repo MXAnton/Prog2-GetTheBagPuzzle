@@ -8,18 +8,30 @@ public class PlayerCamera : MonoBehaviour
     private Transform camTransform;
 
     [SerializeField]
-    private float mouseSensivity = 1f;
+    private float mouseSensivity = 2f;
+
+    [SerializeField]
+    private float minCameraXRot = -90;
+    [SerializeField]
+    private float maxCameraXRot = 60;
+
+    private float xRotation = 0;
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        float _rotateHorizontal = Input.GetAxis("Mouse X");
-        float _rotateVertical = Input.GetAxis("Mouse Y");
+        float _rotateHorizontal = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime * 100;
+        float _rotateVertical = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime * 100;
         
-        transform.Rotate(-transform.up * _rotateHorizontal * mouseSensivity);
-        camTransform.Rotate(Vector3.right * _rotateVertical * mouseSensivity);
+        xRotation -= _rotateVertical;
+        xRotation = Mathf.Clamp(xRotation, minCameraXRot, maxCameraXRot);
+
+        camTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.Rotate(transform.up * _rotateHorizontal);
+
+        // camTransform.Rotate(Vector3.right * _rotateVertical);
     }
 }
