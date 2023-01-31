@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.velocity = _moveDir;
-        
+
         playerJump = false;
     }
 
