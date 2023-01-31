@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player jump vars")]
     [SerializeField]
     private float jumpPower = 10f;
+    [SerializeField]
+    private bool playerJump = false;
     public bool isGrounded = false;
 
     [Header("Player movement speeds")]
@@ -45,39 +47,46 @@ public class PlayerMovement : MonoBehaviour
         movementInput = Vector2.ClampMagnitude(movementInput, 1);
         
         Move();
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            TryJump();
-        }
     }
 
     private void Update() {
         GetPlayerCrouchLayingState();
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (isGrounded) {
+                playerJump = true;
+            } else {
+                playerJump = false;
+            }
+        }
     }
 
     private void Move() {
         Vector3 _moveDir = (movementInput.y * transform.forward) + (movementInput.x * transform.right);
         _moveDir *= movementSpeed * Time.fixedDeltaTime;
 
+        float _jumpPower = jumpPower;
+
         if (Input.GetKey(KeyCode.LeftShift)) {
             _moveDir *= runMultiplier;
         }
         if (isCrouching) {
             _moveDir *= crouchMovementSpeedMultiplier;
+            _jumpPower *= crouchMovementSpeedMultiplier; // Jump lower on crouch
         }
         if (isLayingDown) {
             _moveDir *= layDownMovementSpeedMultiplier;
+            _jumpPower *= layDownMovementSpeedMultiplier; // Jump even lower on laydown
         }
 
         _moveDir.y = rb.velocity.y; // Don't change gravity or jump force
+        if (playerJump) {
+            _moveDir.y = _jumpPower; // Set y velocity to modified _jumpPower
+        }
 
         rb.velocity = _moveDir;
-    }
-
-    private void TryJump() {
-        if (isGrounded) {
-            rb.velocity = new Vector3(rb.velocity.x, jumpPower, rb.velocity.z);
-        }
+        
+        playerJump = false;
     }
 
     private void GetPlayerCrouchLayingState() {
