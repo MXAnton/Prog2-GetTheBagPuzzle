@@ -1251,6 +1251,7 @@ MonoBehaviour:
   runMultiplier: 1.8
   crouchMovementSpeedMultiplier: 0.6
   layDownMovementSpeedMultiplier: 0.3
+  inAirMovementMultiplier: 0.8
   isCrouching: 0
   crouchHeight: 0.6
   isLayingDown: 0
