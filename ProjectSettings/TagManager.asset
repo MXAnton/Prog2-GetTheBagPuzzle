@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UsableItem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - UsableItem
   - Water
   - UI
   - Player
