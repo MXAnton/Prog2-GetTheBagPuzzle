@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerItemController : MonoBehaviour
 {
@@ -15,37 +16,51 @@ public class PlayerItemController : MonoBehaviour
     [SerializeField]
     private float throwItemUpwardForce = 1f;
 
+    [Space]
+    [SerializeField]
+    private GameObject usableItemInRange = null;
+
+    [Header("UI")]
+    [SerializeField]
+    private Image crosshair;
+
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        RayForUsableItem();
+
+        SetCrosshair();
+
+        if (Input.GetKeyDown(KeyCode.E) && usableItemInRange) {
             if (!usedItem) {
-                TryPickupItem();
+                PickupItem(usableItemInRange);
             } else {
-                Debug.Log("Player already have item used.");
+                // Player already have item used, throw old and pickup new
+                ThrowItem();
+                PickupItem(usableItemInRange);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.G)) {
-            if (usedItem) {
-                // Throw item
-                ThrowItem();
-            }
+        if (Input.GetKeyDown(KeyCode.G) && usedItem) {
+            // Throw item
+            ThrowItem();
         }
     }
 
-    private void TryPickupItem() {
+    private void RayForUsableItem() {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;
         // Cast a ray from player center of screen forward.
         if (Physics.Raycast(ray, out hit, useItemRange))
         {
             if (hit.transform.tag == "UsableItem") {
-                // Found usable item, grab it
-                PickupItem(hit.transform.gameObject);
+                // Found usable item, return it
+                usableItemInRange = hit.transform.gameObject;
+                return;
             }
-
-            // Debug.DrawRay(transform.position, transform.forward * useItemRange, Color.red, 1);
         }
+
+        usableItemInRange = null;
     }
+
     private void PickupItem(GameObject _objectToPickup) {
         usedItem = _objectToPickup;
         usedItem.GetComponent<UsableItemController>().GetPickedUp(gameObject);
@@ -59,4 +74,19 @@ public class PlayerItemController : MonoBehaviour
         usedItem.GetComponent<UsableItemController>().GetThrown(_throwForce);
         usedItem = null;
     }
+
+
+    #region UI
+    
+    private void SetCrosshair() {
+        if (usableItemInRange && !usedItem) {
+            crosshair.color = Color.green;
+        } else if (usableItemInRange) {
+            crosshair.color = Color.red;
+        } else {
+            crosshair.color = Color.white;
+        }
+    }
+
+    #endregion
 }
