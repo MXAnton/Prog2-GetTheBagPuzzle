@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usedItem: {fileID: 0}
-  useItemRange: 2.5
+  useItemRange: 2
   throwItemForce: 600
   throwItemUpwardForce: 1
   usableItemInRange: {fileID: 0}
