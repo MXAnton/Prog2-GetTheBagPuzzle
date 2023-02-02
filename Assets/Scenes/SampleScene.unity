@@ -1504,8 +1504,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camTransform: {fileID: 330585546}
   mouseSensivity: 2
-  minCameraXRot: -90
-  maxCameraXRot: 60
+  minCameraXRot: -85
+  maxCameraXRot: 75
 --- !u!54 &1582235101
 Rigidbody:
   m_ObjectHideFlags: 0

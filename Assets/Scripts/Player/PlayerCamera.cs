@@ -11,9 +11,9 @@ public class PlayerCamera : MonoBehaviour
     private float mouseSensivity = 2f;
 
     [SerializeField]
-    private float minCameraXRot = -90;
+    private float minCameraXRot = -85;
     [SerializeField]
-    private float maxCameraXRot = 60;
+    private float maxCameraXRot = 75;
 
     private float xRotation = 0;
 
