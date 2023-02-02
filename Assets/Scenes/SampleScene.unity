@@ -1372,6 +1372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usedItem: {fileID: 0}
   useItemRange: 2.5
+  throwItemForce: 600
+  throwItemUpwardForce: 1
 --- !u!1001 &1560366594
 PrefabInstance:
   m_ObjectHideFlags: 0

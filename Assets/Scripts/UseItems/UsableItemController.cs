@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UsableItemController : MonoBehaviour
 {
-    private BoxCollider collider;
+    private BoxCollider col;
     private Rigidbody rb;
     
     [SerializeField]
     private GameObject usedByParent;
 
     private void Start() {
-        collider = gameObject.GetComponent<BoxCollider>();
+        col = gameObject.GetComponent<BoxCollider>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -20,8 +20,18 @@ public class UsableItemController : MonoBehaviour
 
         transform.parent = usedByParent.transform;
         rb.isKinematic = true;
-        collider.enabled = false;
+        col.enabled = false;
         transform.position = usedByParent.transform.position;
         transform.rotation = usedByParent.transform.rotation;
+    }
+
+    public void GetThrown(Vector3 _throwForce) {
+        usedByParent = null;
+
+        col.enabled = true;
+        transform.parent = null;
+        rb.isKinematic = false;
+
+        rb.AddForce(_throwForce);
     }
 }
