@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerItemController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject usedItem;
+    // [SerializeField]
+    public GameObject usedItem;
 
     [SerializeField]
     private float useItemRange = 2f;
@@ -17,17 +16,11 @@ public class PlayerItemController : MonoBehaviour
     private float throwItemUpwardForce = 1f;
 
     [Space]
-    [SerializeField]
-    private GameObject usableItemInRange = null;
-
-    [Header("UI")]
-    [SerializeField]
-    private Image crosshair;
+    // [SerializeField]
+    public GameObject usableItemInRange = null;
 
     private void Update() {
         RayForUsableItem();
-
-        SetCrosshair();
 
         if (Input.GetKeyDown(KeyCode.E) && usableItemInRange) {
             if (!usedItem) {
@@ -74,19 +67,4 @@ public class PlayerItemController : MonoBehaviour
         usedItem.GetComponent<UsableItemController>().GetThrown(_throwForce);
         usedItem = null;
     }
-
-
-    #region UI
-    
-    private void SetCrosshair() {
-        if (usableItemInRange && !usedItem) {
-            crosshair.color = Color.green;
-        } else if (usableItemInRange) {
-            crosshair.color = Color.red;
-        } else {
-            crosshair.color = Color.white;
-        }
-    }
-
-    #endregion
 }

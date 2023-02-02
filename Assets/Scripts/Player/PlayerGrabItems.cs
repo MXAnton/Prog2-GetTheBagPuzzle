@@ -7,13 +7,13 @@ public class PlayerGrabItems : MonoBehaviour
     [SerializeField]
     private Transform grabbedItemTarget;
 
-    [SerializeField]
-    private GameObject currentGrabbedItem;
+    // [SerializeField]
+    public GameObject currentGrabbedItem;
 
     [SerializeField]
     private float grabItemRange = 2f;
-    [SerializeField]
-    private GameObject grabbableItemInRange;
+    // [SerializeField]
+    public GameObject grabbableItemInRange;
 
     [SerializeField]
     private float grabForce = 20f;
