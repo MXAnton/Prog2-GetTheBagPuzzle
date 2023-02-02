@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField]
+    private CapsuleCollider groundFrictionCol;
 
     [Header("Player jump vars")]
     [SerializeField]
@@ -177,15 +179,19 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SetPlayerHeight() {
         Vector3 _newSize = new Vector3(transform.localScale.x, 1, transform.localScale.z); // 1 default height
+        Vector3 _newGroundFrictionColOffset = new Vector3(0, 0.32f, 0); // 0.32f default height
 
         if (isCrouching) {
             _newSize.y = crouchHeight;
+            _newGroundFrictionColOffset.y /= crouchHeight;
         }
         if (isLayingDown) {
             _newSize.y = layDownHeight;
+            _newGroundFrictionColOffset.y /= layDownHeight;
         }
 
         transform.localScale = _newSize;
+        groundFrictionCol.center = _newGroundFrictionColOffset;
     }
 
 
