@@ -9,7 +9,7 @@ public class PlayerItemController : MonoBehaviour
     private GameObject usedItem;
 
     [SerializeField]
-    private float useItemRange = 2.5f;
+    private float useItemRange = 2f;
 
     [SerializeField]
     private float throwItemForce = 600f;

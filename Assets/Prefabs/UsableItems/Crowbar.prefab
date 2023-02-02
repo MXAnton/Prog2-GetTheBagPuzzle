@@ -125,9 +125,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4047155228831667720}
-  - component: {fileID: 4209193453740573212}
   - component: {fileID: 9133960871482271670}
   - component: {fileID: 3517448496324919550}
+  - component: {fileID: 81697541273730567}
+  - component: {fileID: 7181100596537527096}
   m_Layer: 3
   m_Name: Crowbar
   m_TagString: UsableItem
@@ -151,19 +152,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.87}
---- !u!65 &4209193453740573212
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4047155228831667723}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 1, z: 0.21}
-  m_Center: {x: 0, y: 0, z: 0.075}
 --- !u!54 &9133960871482271670
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -193,6 +181,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usedByParent: {fileID: 0}
+--- !u!65 &81697541273730567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047155228831667723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 1, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &7181100596537527096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047155228831667723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.05, z: 0.2}
+  m_Center: {x: 0, y: 0.475, z: 0.075}
 --- !u!1 &4047155229138923532
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UsableItemController : MonoBehaviour
 {
-    private BoxCollider col;
+    private BoxCollider[] cols;
     private Rigidbody rb;
     
     [SerializeField]
@@ -16,7 +16,7 @@ public class UsableItemController : MonoBehaviour
     private Vector3 startRot;
 
     private void Start() {
-        col = gameObject.GetComponent<BoxCollider>();
+        cols = gameObject.GetComponents<BoxCollider>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -39,7 +39,10 @@ public class UsableItemController : MonoBehaviour
 
         transform.parent = usedByParent.transform;
         rb.isKinematic = true;
-        col.enabled = false;
+        foreach (BoxCollider _col in cols)
+        {
+            _col.enabled = false;
+        }
 
         // transform.position = usedByParent.transform.position;
         // transform.rotation = usedByParent.transform.rotation;
@@ -52,7 +55,10 @@ public class UsableItemController : MonoBehaviour
     public void GetThrown(Vector3 _throwForce) {
         usedByParent = null;
 
-        col.enabled = true;
+        foreach (BoxCollider _col in cols)
+        {
+            _col.enabled = true;
+        }
         transform.parent = null;
         rb.isKinematic = false;
 
