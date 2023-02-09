@@ -1605,6 +1605,7 @@ GameObject:
   - component: {fileID: 1582235099}
   - component: {fileID: 1582235104}
   - component: {fileID: 1582235105}
+  - component: {fileID: 1582235106}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1739,6 +1740,20 @@ MonoBehaviour:
   crosshairNormal: {fileID: 21300000, guid: 2d07c4b1a54fdc14abadca8c7b4803ea, type: 3}
   crosshairGrab: {fileID: 21300000, guid: e40720482968fbb4eb387fcda9f3780b, type: 3}
   crosshairGrabbed: {fileID: 21300000, guid: d73ac0450e4921b499ec75d8f2a73d19, type: 3}
+--- !u!114 &1582235106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582235098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1081a33c60e606c41a0a3283cb847f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 100
 --- !u!1 &1652313857
 GameObject:
   m_ObjectHideFlags: 0
