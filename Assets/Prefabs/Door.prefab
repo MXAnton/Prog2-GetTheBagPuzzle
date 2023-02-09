@@ -48,7 +48,7 @@ MonoBehaviour:
   doorHingeJoint: {fileID: 1697564711}
   lockController: {fileID: 0}
   openable: 1
-  limitLerpDurationMultiplier: 1
+  limitLerpDurationMultiplier: 4
 --- !u!1 &5614971087227793604
 GameObject:
   m_ObjectHideFlags: 0
