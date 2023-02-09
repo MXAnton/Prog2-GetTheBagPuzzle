@@ -1047,7 +1047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &807021459
 Transform:
   m_ObjectHideFlags: 0
@@ -1073,10 +1073,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 5930fb8008df53547953865153fe963b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.33
+  m_Radius: 0.36
   m_Height: 0.1
   m_Direction: 1
-  m_Center: {x: 0, y: 0.32, z: 0}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundFrictionCol: {fileID: 807021460}
+  groundFrictionColOffset: 0.35
   jumpPower: 4
   playerJump: 0
   isGrounded: 0
@@ -1747,7 +1748,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1582235098}
   m_Material: {fileID: 13400000, guid: 5930fb8008df53547953865153fe963b, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.33
   m_Height: 0.1
   m_Direction: 1
