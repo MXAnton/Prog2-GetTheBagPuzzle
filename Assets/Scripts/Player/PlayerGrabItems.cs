@@ -58,7 +58,9 @@ public class PlayerGrabItems : MonoBehaviour
         // Cast a ray from player center of screen forward.
         if (Physics.Raycast(ray, out hit, grabItemRange))
         {
-            if (hit.transform.tag == "Grabbable" || hit.transform.tag == "UsableItem") {
+            if (hit.transform.tag == "Grabbable" 
+                    || hit.transform.tag == "UsableItem"
+                    || hit.transform.tag == "Door") {
                 // Found usable item, return it
                 grabbableItemInRange = hit.transform.gameObject;
                 return;
