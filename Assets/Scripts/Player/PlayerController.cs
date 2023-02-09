@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void RayForward() {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;

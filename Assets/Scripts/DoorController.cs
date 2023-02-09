@@ -10,8 +10,7 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private LockController lockController;
 
-    [SerializeField]
-    private bool openable = true;
+    public bool openable = true;
 
     // Hingejoint limit vars
     private float minLimit = -100;

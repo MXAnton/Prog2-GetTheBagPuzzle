@@ -16,6 +16,8 @@ public class PlayerGrabItems : MonoBehaviour
     private float grabItemRange = 2f;
     // [SerializeField]
     public GameObject grabbableItemInRange;
+    public bool isGrabbableItemLocked = false;
+    public bool lockInReach = false;
 
     [SerializeField]
     private float grabForce = 20f;
@@ -53,20 +55,38 @@ public class PlayerGrabItems : MonoBehaviour
 
 
     private void RayForGrabbableItem() {
+        bool _newIsGrabbableItemLocked = false;
+
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;
         // Cast a ray from player center of screen forward.
         if (Physics.Raycast(ray, out hit, grabItemRange))
         {
+            if (hit.transform.tag == "Lock") {
+                lockInReach = true;
+            } else {
+                lockInReach = false;
+            }
+
             if (hit.transform.tag == "Grabbable" 
                     || hit.transform.tag == "UsableItem"
                     || hit.transform.tag == "Door") {
                 // Found usable item, return it
                 grabbableItemInRange = hit.transform.gameObject;
+
+                if (hit.transform.tag == "Door") {
+                    // Check if locked
+                    if (!hit.transform.parent.gameObject.GetComponent<DoorController>().openable) {
+                        _newIsGrabbableItemLocked = true;
+                    }
+                }
+
+                isGrabbableItemLocked = _newIsGrabbableItemLocked;
                 return;
             }
         }
 
+        isGrabbableItemLocked = _newIsGrabbableItemLocked;
         grabbableItemInRange = null;
     }
 }

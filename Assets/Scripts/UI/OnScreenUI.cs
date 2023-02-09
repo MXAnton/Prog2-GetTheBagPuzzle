@@ -10,6 +10,8 @@ public class OnScreenUI : MonoBehaviour
     private PlayerItemController playerItemController;
     [SerializeField]
     private PlayerGrabItems playerGrabItems;
+    // [SerializeField]
+    // private PlayerController playerController;
 
     [Header("UI")]
     [SerializeField]
@@ -21,6 +23,10 @@ public class OnScreenUI : MonoBehaviour
     private Sprite crosshairGrab;
     [SerializeField]
     private Sprite crosshairGrabbed;
+    [SerializeField]
+    private Sprite crosshairLocked;
+    [SerializeField]
+    private Sprite crosshairUnLock;
 
     private void Update() {
         SetCrosshair();
@@ -36,7 +42,11 @@ public class OnScreenUI : MonoBehaviour
             crosshair.color = Color.white;
         }
 
-        if (playerGrabItems.currentGrabbedItem) {
+        if (playerGrabItems.lockInReach) {
+            crosshair.sprite = crosshairUnLock;
+        } else if (playerGrabItems.isGrabbableItemLocked) {
+            crosshair.sprite = crosshairLocked;
+        } else if (playerGrabItems.currentGrabbedItem) {
             crosshair.sprite = crosshairGrabbed;
         } else if (playerGrabItems.grabbableItemInRange) {
             crosshair.sprite = crosshairGrab;
