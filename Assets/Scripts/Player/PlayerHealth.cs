@@ -10,21 +10,21 @@ public class PlayerHealth : MonoBehaviour
     private float maxHealth = 100;
 
     private void Start() {
-        SetPlayerHealth(maxHealth);
+        SetHealth(maxHealth);
     }
 
-    public void SetPlayerHealth(float _newHealth) {
+    public void SetHealth(float _newHealth) {
         health = _newHealth;
     }
 
-    public void AddPlayerHealth(float _amount) {
+    public void AddHealth(float _amount) {
         float _newHealth = health + _amount;
         if (_newHealth > maxHealth) {
             _newHealth = maxHealth;
         }
         health = _newHealth;
     }
-    public void RemovePlayerHealth(float _amount) {
+    public void RemoveHealth(float _amount) {
         float _newHealth = health - _amount;
         if (_newHealth <= 0) {
             _newHealth = 0;
