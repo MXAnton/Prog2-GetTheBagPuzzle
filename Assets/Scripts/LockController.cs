@@ -6,12 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class LockController : MonoBehaviour
 {
+    private Rigidbody rb;
+    private Collider col;
     private Animator animator;
 
     [SerializeField]
     private bool isLocked = true;
 
     private void Start() {
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         animator.SetBool("locked", isLocked);
     }
@@ -45,5 +49,15 @@ public class LockController : MonoBehaviour
 
         // show lock unlocked graphical with anim etc.
         animator.SetBool("locked", isLocked);
+    }
+
+    public void BreakLock() {
+        UnLock();
+
+        col.isTrigger = false;
+        rb.isKinematic = false;
+        this.enabled = false;
+
+        gameObject.tag = "Grabbable";
     }
 }

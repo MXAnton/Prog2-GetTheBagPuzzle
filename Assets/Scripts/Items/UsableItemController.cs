@@ -6,9 +6,10 @@ public class UsableItemController : MonoBehaviour
 {
     private BoxCollider[] cols;
     private Rigidbody rb;
+
+    public Animator animator;
     
-    [SerializeField]
-    private GameObject usedByParent;
+    public GameObject usedByParent;
 
     private float lerpTimeElapsed;
     private float lerpTransformDuration = 0.4f;
@@ -63,5 +64,10 @@ public class UsableItemController : MonoBehaviour
         rb.isKinematic = false;
 
         rb.AddForce(_throwForce);
+
+        
+        if (animator) {
+            animator.SetTrigger("idle");
+        }
     }
 }

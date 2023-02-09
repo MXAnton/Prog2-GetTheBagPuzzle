@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1733375962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1733375963}
+  - component: {fileID: 1733375965}
+  - component: {fileID: 1733375964}
+  m_Layer: 3
+  m_Name: AttackCol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1733375963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733375962}
+  m_LocalRotation: {x: -0.000000029802322, y: 0.00000002142042, z: 0.7071068, w: 0.70710677}
+  m_LocalPosition: {x: -0.343, y: -0.002, z: 0.111}
+  m_LocalScale: {x: 0.43281913, y: 1.1125, z: 0.5358283}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4047155227629731840}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1733375965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733375962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1733375964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733375962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d41fb51c2b8ff74cb4376f8b90967e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crowbarController: {fileID: 531652279208907931}
 --- !u!1 &4047155227629731843
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +68,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4047155227629731840}
+  - component: {fileID: 522562779}
   m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
@@ -30,9 +90,30 @@ Transform:
   m_Children:
   - {fileID: 4047155227998035679}
   - {fileID: 4047155229138923533}
+  - {fileID: 1733375963}
   m_Father: {fileID: 4047155228831667720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!95 &522562779
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047155227629731843}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 82b4be10cb48d834db507e2837340a10, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &4047155227998035678
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4047155228831667720}
   - component: {fileID: 9133960871482271670}
+  - component: {fileID: 531652279208907931}
   - component: {fileID: 3517448496324919550}
   - component: {fileID: 81697541273730567}
   - component: {fileID: 7181100596537527096}
@@ -168,6 +250,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &531652279208907931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047155228831667723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c5cfb6f5e38c7479b061c953f5196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!114 &3517448496324919550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277f2c12f30a43b4ea5eb3975a087791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 522562779}
   usedByParent: {fileID: 0}
 --- !u!65 &81697541273730567
 BoxCollider:
