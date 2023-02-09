@@ -1601,7 +1601,6 @@ GameObject:
   - component: {fileID: 1582235103}
   - component: {fileID: 1582235102}
   - component: {fileID: 1582235101}
-  - component: {fileID: 1582235106}
   - component: {fileID: 1582235100}
   - component: {fileID: 1582235099}
   - component: {fileID: 1582235104}
@@ -1718,6 +1717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabbedItemTarget: {fileID: 362358607}
   currentGrabbedItem: {fileID: 0}
+  maxGrabItemRange: 5
   grabItemRange: 2
   grabbableItemInRange: {fileID: 0}
   grabForce: 20
@@ -1739,20 +1739,6 @@ MonoBehaviour:
   crosshairNormal: {fileID: 21300000, guid: 2d07c4b1a54fdc14abadca8c7b4803ea, type: 3}
   crosshairGrab: {fileID: 21300000, guid: e40720482968fbb4eb387fcda9f3780b, type: 3}
   crosshairGrabbed: {fileID: 21300000, guid: d73ac0450e4921b499ec75d8f2a73d19, type: 3}
---- !u!136 &1582235106
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582235098}
-  m_Material: {fileID: 13400000, guid: 5930fb8008df53547953865153fe963b, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.33
-  m_Height: 0.1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.32, z: 0}
 --- !u!1 &1652313857
 GameObject:
   m_ObjectHideFlags: 0

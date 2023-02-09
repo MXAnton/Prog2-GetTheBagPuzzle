@@ -9,6 +9,8 @@ public class PlayerGrabItems : MonoBehaviour
 
     // [SerializeField]
     public GameObject currentGrabbedItem;
+    [SerializeField]
+    private float maxGrabItemRange = 5f;
 
     [SerializeField]
     private float grabItemRange = 2f;
@@ -40,6 +42,9 @@ public class PlayerGrabItems : MonoBehaviour
             if (!currentGrabbedItem) {
                 // No item grabbed, grab new item
                 currentGrabbedItem = grabbableItemInRange;
+            } else if (Vector3.Distance(currentGrabbedItem.transform.position, transform.position) > maxGrabItemRange) {
+                // Drop if item if to far away
+                currentGrabbedItem = null;
             }
         } else {
             currentGrabbedItem = null;
