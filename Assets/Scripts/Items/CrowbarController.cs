@@ -8,6 +8,8 @@ public class CrowbarController : MonoBehaviour
 
     [SerializeField]
     private float damage = 20;
+    [SerializeField]
+    private float attackDuration = 1f;
 
     private void Start() {
         usableItemController = GetComponent<UsableItemController>();
@@ -16,8 +18,10 @@ public class CrowbarController : MonoBehaviour
     private void Update() {
         if (usableItemController.usedByParent) {
             // Being used by player
-            if (Input.GetMouseButtonDown(0)) {
-                Attack();
+            if (!usableItemController.isAction) {
+                if (Input.GetMouseButtonDown(0)) {
+                    Attack();
+                }
             }
         }
     }
@@ -25,6 +29,9 @@ public class CrowbarController : MonoBehaviour
     private void Attack() {
         // Debug.Log("Crowbar attack");
         usableItemController.animator.SetTrigger("attack");
+        usableItemController.isAction = true;
+        StopAllCoroutines();
+        StartCoroutine(IsActionFalseIn(attackDuration));
     }
 
 
@@ -32,5 +39,10 @@ public class CrowbarController : MonoBehaviour
         if (_hit.tag == "Lock") {
             _hit.GetComponent<LockController>().BreakLock();
         }
+    }
+
+    private IEnumerator IsActionFalseIn(float _seconds) {
+        yield return new WaitForSeconds(_seconds);
+        usableItemController.isAction = false;
     }
 }

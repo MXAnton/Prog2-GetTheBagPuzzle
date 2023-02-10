@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  attackDuration: 0.9
 --- !u!114 &3517448496324919550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 522562779}
+  isAction: 0
   usedByParent: {fileID: 0}
 --- !u!65 &81697541273730567
 BoxCollider:

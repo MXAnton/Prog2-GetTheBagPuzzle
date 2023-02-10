@@ -20,6 +20,19 @@ public class PlayerItemController : MonoBehaviour
     public GameObject usableItemInRange = null;
 
     private void Update() {
+        if (Input.GetKeyDown(KeyCode.G) && usedItem) {
+            // Throw item
+            ThrowItem();
+        }
+
+        if (usedItem) {
+            if (usedItem.GetComponent<UsableItemController>().isAction) {
+                // Disable item pickup etc when attacking etc.
+                usableItemInRange = null;
+                return;
+            }
+        }
+
         RayForUsableItem();
 
         if (Input.GetKeyDown(KeyCode.E) && usableItemInRange) {
@@ -30,11 +43,6 @@ public class PlayerItemController : MonoBehaviour
                 ThrowItem();
                 PickupItem(usableItemInRange);
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.G) && usedItem) {
-            // Throw item
-            ThrowItem();
         }
     }
 

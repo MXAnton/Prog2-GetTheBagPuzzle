@@ -9,6 +9,8 @@ public class UsableItemController : MonoBehaviour
 
     public Animator animator;
     
+    public bool isAction = false;
+
     public GameObject usedByParent;
 
     private float lerpTimeElapsed;
@@ -34,6 +36,12 @@ public class UsableItemController : MonoBehaviour
             }
         }
     }
+
+    // private void Update() {
+    //     if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+    //         isAction = false;
+    //     }
+    // }
 
     public void GetPickedUp(GameObject _newParent) {
         usedByParent = _newParent;
@@ -69,5 +77,7 @@ public class UsableItemController : MonoBehaviour
         if (animator) {
             animator.SetTrigger("idle");
         }
+
+        isAction = false;
     }
 }
