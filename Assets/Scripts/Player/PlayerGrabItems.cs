@@ -40,7 +40,7 @@ public class PlayerGrabItems : MonoBehaviour
     private void Update() {
         RayForGrabbableItem();
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(1)) {
             if (!currentGrabbedItem) {
                 // No item grabbed, grab new item
                 currentGrabbedItem = grabbableItemInRange;
