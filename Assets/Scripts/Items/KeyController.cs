@@ -13,6 +13,14 @@ public class KeyController : MonoBehaviour
     }
 
     private void Update() {
+        if (!usableItemController.usedByParent || usableItemController.isAction) {
+            return;
+        }
+
+        // if (Input.GetKeyDown(KeyCode.E)) {
+
+        // }
+
         // if (usableItemController.usedByParent) {
         //     // Being used by player
         //     if (!usableItemController.isAction 

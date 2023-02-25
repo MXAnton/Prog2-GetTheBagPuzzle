@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Reference scripts")]
+    [SerializeField]
+    private PlayerCamera playerCamera;
+
     private Rigidbody rb;
+    
+    [Space]
+    [SerializeField]
+    private Transform body;
     [SerializeField]
     private CapsuleCollider groundFrictionCol;
     [SerializeField]
@@ -46,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerCamera.MoveCamToTarget();
     }
 
     private void FixedUpdate() {
@@ -134,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check if can stand up from crouch or lay down - if above height as much as needed
-        float _maxPlayerHeight = getHeightAbove() + transform.localScale.y * 2;
+        float _maxPlayerHeight = getHeightAbove() + body.localScale.y * 2;
         // Debug.Log("Height above: " + getHeightAbove() + " - Maxplayerheight: " + _maxPlayerHeight);
         if (_maxPlayerHeight <= crouchHeight * 2) {
             // Cant crouch, to little space above.
@@ -165,8 +174,8 @@ public class PlayerMovement : MonoBehaviour
         float _heightAbove = Mathf.Infinity; // Default to unlimited height above player
 
         RaycastHit hit;
-        Vector3 _rayStartPos = transform.position;
-        _rayStartPos.y += transform.localScale.y * 2; // Start on top of player head
+        Vector3 _rayStartPos = body.position;
+        _rayStartPos.y += body.localScale.y * 2; // Start on top of player head
         Ray upRay = new Ray(_rayStartPos, Vector3.up);
         // Cast a ray straight upwards.
         if (Physics.Raycast(upRay, out hit))
@@ -180,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         return _heightAbove;
     }
     private void SetPlayerHeight() {
-        Vector3 _newSize = new Vector3(transform.localScale.x, 1, transform.localScale.z); // 1 default height
+        Vector3 _newSize = new Vector3(body.localScale.x, 1, body.localScale.z); // 1 default height
         Vector3 _newGroundFrictionColOffset = new Vector3(0, groundFrictionColOffset, 0); // 0.35f default height
 
         if (isCrouching) {
@@ -192,32 +201,9 @@ public class PlayerMovement : MonoBehaviour
             _newGroundFrictionColOffset.y /= layDownHeight;
         }
 
-        transform.localScale = _newSize;
+        body.localScale = _newSize;
         groundFrictionCol.center = _newGroundFrictionColOffset;
+        
+        playerCamera.MoveCamToTarget();
     }
-
-
-    // Check if grounded with downwards raycast - old
-    /*
-    private bool CheckIfGroundedDownRay() {
-        bool _isGrounded = false; // Default to false
-
-        RaycastHit hit;
-        Vector3 _rayStartPos = transform.position; // Starts on bottom of player
-        _rayStartPos.y += 0.1f;
-        Ray downRay = new Ray(_rayStartPos, -Vector3.up);
-
-        // Cast a ray straight downwards.
-        // If distance to ground less than 0.1f
-        if (Physics.Raycast(downRay, out hit, 5))
-        {
-            if (hit.distance < 0.3f) {
-                _isGrounded = true;
-            }
-            Debug.DrawRay(_rayStartPos, -Vector3.up * hit.distance, Color.blue, 0.1f);
-        }
-
-        return _isGrounded;
-    }
-    */
 }

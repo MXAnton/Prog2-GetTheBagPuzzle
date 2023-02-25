@@ -6,6 +6,8 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField]
     private Transform camTransform;
+    [SerializeField]
+    private Transform camTarget;
 
     [SerializeField]
     private float mouseSensivity = 2f;
@@ -31,7 +33,9 @@ public class PlayerCamera : MonoBehaviour
 
         camTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(transform.up * _rotateHorizontal);
+    }
 
-        // camTransform.Rotate(Vector3.right * _rotateVertical);
+    public void MoveCamToTarget() {
+        camTransform.position = camTarget.position;
     }
 }

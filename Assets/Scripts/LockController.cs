@@ -11,6 +11,8 @@ public class LockController : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
+    private int lockId = 1;
+    [SerializeField]
     private bool isLocked = true;
 
     private void Start() {
