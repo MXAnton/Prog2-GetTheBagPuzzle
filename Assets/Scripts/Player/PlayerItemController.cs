@@ -4,27 +4,15 @@ using UnityEngine;
 
 public class PlayerItemController : MonoBehaviour
 {
-    // [SerializeField]
+    public GameObject usableItemInRange;
     public GameObject usedItem;
-
-    [SerializeField]
-    private float useItemRange = 2f;
 
     [SerializeField]
     private float throwItemForce = 600f;
     [SerializeField]
     private float throwItemUpwardForce = 1f;
 
-    [Space]
-    // [SerializeField]
-    public GameObject usableItemInRange = null;
-
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.G) && usedItem) {
-            // Throw item
-            ThrowItem();
-        }
-
         if (usedItem) {
             if (usedItem.GetComponent<UsableItemController>().isAction) {
                 // Disable item pickup etc when attacking etc.
@@ -33,33 +21,18 @@ public class PlayerItemController : MonoBehaviour
             }
         }
 
-        RayForUsableItem();
-
         if (Input.GetKeyDown(KeyCode.E) && usableItemInRange) {
-            if (!usedItem) {
-                PickupItem(usableItemInRange);
-            } else {
-                // Player already have item used, throw old and pickup new
+            if (usedItem) {
+                // Player already have item used, throw old first and then pickup new
                 ThrowItem();
-                PickupItem(usableItemInRange);
             }
-        }
-    }
-
-    private void RayForUsableItem() {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-        RaycastHit hit;
-        // Cast a ray from player center of screen forward.
-        if (Physics.Raycast(ray, out hit, useItemRange))
-        {
-            if (hit.transform.tag == "UsableItem") {
-                // Found usable item, return it
-                usableItemInRange = hit.transform.gameObject;
-                return;
-            }
+            PickupItem(usableItemInRange);
         }
 
-        usableItemInRange = null;
+        if (Input.GetKeyDown(KeyCode.G) && usedItem) {
+            // Throw item
+            ThrowItem();
+        }
     }
 
     private void PickupItem(GameObject _objectToPickup) {

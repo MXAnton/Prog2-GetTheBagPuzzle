@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UsableItemController : MonoBehaviour
 {
+    [SerializeField]
     private BoxCollider[] cols;
     private Rigidbody rb;
 
@@ -19,7 +20,7 @@ public class UsableItemController : MonoBehaviour
     private Vector3 startRot;
 
     private void Start() {
-        cols = gameObject.GetComponents<BoxCollider>();
+        // cols = gameObject.GetComponents<BoxCollider>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
