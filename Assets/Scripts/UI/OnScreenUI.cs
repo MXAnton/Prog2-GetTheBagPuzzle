@@ -42,7 +42,7 @@ public class OnScreenUI : MonoBehaviour
             crosshair.color = Color.white;
         }
 
-        if (playerController.lockInReach) {
+        if (playerController.lockInRange) {
             crosshair.sprite = crosshairUnLock;
         } else if (playerController.lockedObjectInReach) {
             crosshair.sprite = crosshairLocked;

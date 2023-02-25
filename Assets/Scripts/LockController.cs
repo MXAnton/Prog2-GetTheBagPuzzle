@@ -14,6 +14,8 @@ public class LockController : MonoBehaviour
     private int lockId = 1;
     [SerializeField]
     private bool isLocked = true;
+    [SerializeField]
+    private bool breakable = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -46,7 +48,18 @@ public class LockController : MonoBehaviour
         // show lock locked graphical with anim etc.
         animator.SetBool("locked", isLocked);
     }
-    public void UnLock() {
+    private void UnLock() {
+        isLocked = false;
+
+        // show lock unlocked graphical with anim etc.
+        animator.SetBool("locked", isLocked);
+    }
+    public void UnLock(int _keyId) {
+        if (_keyId != lockId) {
+            Debug.Log("Wrong key id");
+            return;
+        }
+
         isLocked = false;
 
         // show lock unlocked graphical with anim etc.
@@ -54,6 +67,11 @@ public class LockController : MonoBehaviour
     }
 
     public void BreakLock() {
+        if (!breakable) {
+            Debug.Log("Lock not breakable");
+            return;
+        }
+
         UnLock();
 
         col.isTrigger = false;

@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask interactLayerMask;
     [Space]
-    public bool lockInReach = false;
+    // public bool lockInReach = false;
+    public GameObject lockInRange;
     public bool lockedObjectInReach = false;
 
     private void Update() {
@@ -25,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private void RayForward() {
         bool _newLockedObjectInReach = false;
-        bool _newLockInReach = false;
+        // bool _newLockInReach = false;
+        GameObject _newLockInRange = null;
 
         GameObject _newUsableItemInRange = null;
         GameObject _newGrabbableItemInRange = null;
@@ -56,11 +58,11 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case "Lock":
-                    if (Input.GetKeyDown(KeyCode.E)) {            
-                        // Found lock item, lock/unlock
-                        hit.transform.gameObject.GetComponent<LockController>().ToggleLockState();
-                    }
-                    _newLockInReach = true;
+                    // if (Input.GetKeyDown(KeyCode.E)) {            
+                    //     // Found lock item, lock/unlock
+                    //     hit.transform.gameObject.GetComponent<LockController>().ToggleLockState();
+                    // }
+                    _newLockInRange = hit.transform.gameObject;
                     break;
                 default:
                     // Debug.Log("Hit: " + hit.transform);
@@ -69,7 +71,9 @@ public class PlayerController : MonoBehaviour
         }
 
         lockedObjectInReach = _newLockedObjectInReach;
-        lockInReach = _newLockInReach;
+        // lockInReach = _newLockInReach;
+
+        lockInRange = _newLockInRange;
 
         playerItemController.usableItemInRange = _newUsableItemInRange;
         playerGrabItems.grabbableItemInRange = _newGrabbableItemInRange;

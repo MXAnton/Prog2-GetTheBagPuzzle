@@ -12,7 +12,7 @@ public class UsableItemController : MonoBehaviour
     
     public bool isAction = false;
 
-    public GameObject usedByParent;
+    public Transform usedByParent;
 
     private float lerpTimeElapsed;
     private float lerpTransformDuration = 0.4f;
@@ -44,10 +44,10 @@ public class UsableItemController : MonoBehaviour
     //     }
     // }
 
-    public void GetPickedUp(GameObject _newParent) {
+    public void GetPickedUp(Transform _newParent) {
         usedByParent = _newParent;
 
-        transform.parent = usedByParent.transform;
+        transform.parent = usedByParent;
         rb.isKinematic = true;
         foreach (BoxCollider _col in cols)
         {

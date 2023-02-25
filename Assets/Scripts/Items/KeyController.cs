@@ -17,22 +17,12 @@ public class KeyController : MonoBehaviour
             return;
         }
 
-        // if (Input.GetKeyDown(KeyCode.E)) {
-
-        // }
-
-        // if (usableItemController.usedByParent) {
-        //     // Being used by player
-        //     if (!usableItemController.isAction 
-        //         && usableItemController.usedByParent.GetComponent<PlayerItemController>().playerGrabItems.lockInReach) {
-        //         if (Input.GetMouseButtonDown(0)) {
-        //             TryUnLock();
-        //         }
-        //     }
-        // }
-    }
-
-    private void TryUnLock() {
-        usableItemController.isAction = true;
+        if (Input.GetKeyDown(KeyCode.E)) {
+            PlayerController _playerController = usableItemController.usedByParent.GetComponent<PlayerItemController>().playerController;
+            if (_playerController.lockInRange) {
+                // Try unlock lock with key
+                _playerController.lockInRange.GetComponent<LockController>().UnLock(keyId);
+            }
+        }
     }
 }

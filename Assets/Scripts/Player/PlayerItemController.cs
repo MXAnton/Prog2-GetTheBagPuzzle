@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerItemController : MonoBehaviour
 {
+    public PlayerController playerController;
+
+    // [Space]
+    // [SerializeField]
+    // private Transform usedItemHolder;
+
+    [Space]
     public GameObject usableItemInRange;
     public GameObject usedItem;
 
@@ -37,7 +44,7 @@ public class PlayerItemController : MonoBehaviour
 
     private void PickupItem(GameObject _objectToPickup) {
         usedItem = _objectToPickup;
-        usedItem.GetComponent<UsableItemController>().GetPickedUp(gameObject);
+        usedItem.GetComponent<UsableItemController>().GetPickedUp(gameObject.transform);
     }
 
     private void ThrowItem() {
