@@ -16,7 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private CapsuleCollider groundFrictionCol;
     [SerializeField]
+    private CapsuleCollider groundedCol;
+    [SerializeField]
     private float groundFrictionColOffset = 0.35f;
+    [SerializeField]
+    private float groundedColOffset = 0.2f;
 
     [Header("Player jump vars")]
     [SerializeField]
@@ -190,19 +194,23 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SetPlayerHeight() {
         Vector3 _newSize = new Vector3(body.localScale.x, 1, body.localScale.z); // 1 default height
-        Vector3 _newGroundFrictionColOffset = new Vector3(0, groundFrictionColOffset, 0); // 0.35f default height
+        Vector3 _newGroundFrictionColOffset = new Vector3(0, groundFrictionColOffset, 0); // 0.35f default offset
+        Vector3 _newGroundedColOffset = new Vector3(0, groundedColOffset, 0); // 0.2f default offset
 
         if (isCrouching) {
             _newSize.y = crouchHeight;
             _newGroundFrictionColOffset.y /= crouchHeight;
+            _newGroundedColOffset.y /= crouchHeight;
         }
         if (isLayingDown) {
             _newSize.y = layDownHeight;
             _newGroundFrictionColOffset.y /= layDownHeight;
+            _newGroundedColOffset.y /= layDownHeight;
         }
 
         body.localScale = _newSize;
         groundFrictionCol.center = _newGroundFrictionColOffset;
+        groundedCol.center = _newGroundedColOffset;
         
         playerCamera.MoveCamToTarget();
     }
