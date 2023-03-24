@@ -1901,7 +1901,7 @@ PrefabInstance:
     - target: {fileID: 4047155228831667720, guid: e8ece951e1aa55843ba06c31818e91bc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4047155228831667720, guid: e8ece951e1aa55843ba06c31818e91bc,
         type: 3}
@@ -2272,7 +2272,7 @@ Transform:
   - {fileID: 2020729414}
   - {fileID: 1804378396}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1174285563
 PrefabInstance:
@@ -2810,7 +2810,7 @@ PrefabInstance:
     - target: {fileID: 4888172333950136743, guid: 80f45570704450f419bae02f92b480fd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4888172333950136743, guid: 80f45570704450f419bae02f92b480fd,
         type: 3}
@@ -4030,6 +4030,7 @@ GameObject:
   - component: {fileID: 2100642727}
   - component: {fileID: 2100642726}
   - component: {fileID: 2100642728}
+  - component: {fileID: 2100642729}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -4165,6 +4166,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2100642729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100642725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ace1e3674fabb94fab8abcd11c344f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virusController: {fileID: 2100642726}
+  backgroundMusics:
+  - {fileID: 8300000, guid: 7f5a35a82c66fb9449298271d3716a34, type: 3}
+  backgroundMusicPitchMultiplier: 0.5
+  backgroundMusicPitchStart: 0.7
+  backgroundMusicPitchMax: 1.7
 --- !u!1001 &2646299465983149017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4244,7 +4263,7 @@ PrefabInstance:
     - target: {fileID: 4888172333950136743, guid: 80f45570704450f419bae02f92b480fd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4888172333950136743, guid: 80f45570704450f419bae02f92b480fd,
         type: 3}

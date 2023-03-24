@@ -14,10 +14,8 @@ public class VirusController : MonoBehaviour
     private float damageDelay = 2f;
 
     [Space]
-    [SerializeField]
-    private float virusFullySpreadTime = 120;   // 2min * 60sec = 120sec
-    [SerializeField]
-    private float virusSpreadTimer = 0f;
+    public float virusFullySpreadTime = 120;   // 2min * 60sec = 120sec
+    public float virusSpreadTimer = 0f;
     
     private void Start() {
         // init vars
