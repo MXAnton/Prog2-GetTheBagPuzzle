@@ -9,6 +9,7 @@ public class LockController : MonoBehaviour
     private Rigidbody rb;
     private Collider col;
     private Animator animator;
+    private AudioSource audioSource;
 
     [SerializeField]
     private int lockId = 1;
@@ -17,11 +18,16 @@ public class LockController : MonoBehaviour
     [SerializeField]
     private bool breakable = false;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip unlockSound;
+
     private void Start() {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         animator.SetBool("locked", isLocked);
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -53,6 +59,7 @@ public class LockController : MonoBehaviour
 
         // show lock unlocked graphical with anim etc.
         animator.SetBool("locked", isLocked);
+        audioSource.PlayOneShot(unlockSound);
     }
     public void UnLock(int _keyId) {
         if (_keyId != lockId) {
@@ -64,6 +71,7 @@ public class LockController : MonoBehaviour
 
         // show lock unlocked graphical with anim etc.
         animator.SetBool("locked", isLocked);
+        audioSource.PlayOneShot(unlockSound);
     }
 
     public void BreakLock() {
