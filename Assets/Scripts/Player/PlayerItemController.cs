@@ -6,10 +6,6 @@ public class PlayerItemController : MonoBehaviour
 {
     public PlayerController playerController;
 
-    // [Space]
-    // [SerializeField]
-    // private Transform usedItemHolder;
-
     [Space]
     public GameObject usableItemInRange;
     public GameObject usedItem;
@@ -18,6 +14,13 @@ public class PlayerItemController : MonoBehaviour
     private float throwItemForce = 600f;
     [SerializeField]
     private float throwItemUpwardForce = 1f;
+
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip pickupItemSound;
+    [SerializeField]
+    private AudioClip throwItemSound;
+    
 
     private void Update() {
         if (usedItem) {
@@ -43,11 +46,19 @@ public class PlayerItemController : MonoBehaviour
     }
 
     private void PickupItem(GameObject _objectToPickup) {
+        // Play pickup sound
+        playerController.audioSource.PlayOneShot(pickupItemSound);
+
+        // pickup item
         usedItem = _objectToPickup;
         usedItem.GetComponent<UsableItemController>().GetPickedUp(gameObject.transform);
     }
 
     private void ThrowItem() {
+        // Play drop sound
+        playerController.audioSource.PlayOneShot(throwItemSound);
+
+        // drop item
         Vector3 _throwForce = transform.forward;
         _throwForce.y += throwItemUpwardForce; // Make item thrown little upwards
         _throwForce *= throwItemForce; // Add force multiplier

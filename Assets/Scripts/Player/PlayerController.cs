@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerGrabItems playerGrabItems;
 
+    [Header("Components")]
+    public AudioSource audioSource;
+
     [Header("General player vars")]
     [SerializeField]
     private float reach = 2f;
@@ -19,6 +22,10 @@ public class PlayerController : MonoBehaviour
     // public bool lockInReach = false;
     public GameObject lockInRange;
     public bool lockedObjectInReach = false;
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update() {
         RayForward();
