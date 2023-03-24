@@ -2998,11 +2998,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344814817b7db604faf9cc797371c392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1582235107}
   grabbedItemTarget: {fileID: 362358607}
   grabbableItemInRange: {fileID: 0}
   currentGrabbedItem: {fileID: 0}
   dropGrabbedItemRange: 5
   grabForce: 20
+  lockedObjectSound: {fileID: 8300000, guid: 5a944951ecf17354bb725961838c55cd, type: 3}
+  grabItemSound: {fileID: 8300000, guid: 299e870ccd2991d48a4d2443af8d96a6, type: 3}
+  dropObjectSound: {fileID: 8300000, guid: e453cb9c636fd6d4e90d5993ecd6e323, type: 3}
 --- !u!114 &1582235105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,7 +4186,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7f5a35a82c66fb9449298271d3716a34, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.51
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0

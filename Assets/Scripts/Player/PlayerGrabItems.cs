@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerGrabItems : MonoBehaviour
 {
     [SerializeField]
+    private PlayerController playerController;
+
+    [SerializeField]
     private Transform grabbedItemTarget;
 
     public GameObject grabbableItemInRange;
@@ -16,6 +19,14 @@ public class PlayerGrabItems : MonoBehaviour
     [SerializeField]
     private float grabForce = 20f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip lockedObjectSound;
+    [SerializeField]
+    private AudioClip grabItemSound;
+    [SerializeField]
+    private AudioClip dropObjectSound;
+
     private void FixedUpdate() {
         if (currentGrabbedItem) {
             MoveGrabbedItemTowardsTarget();
@@ -24,14 +35,24 @@ public class PlayerGrabItems : MonoBehaviour
 
     private void Update() {
         if (Input.GetMouseButton(1)) {
-            if (!currentGrabbedItem) {
+            if (currentGrabbedItem == null) {
                 // No item grabbed, grab new item
-                currentGrabbedItem = grabbableItemInRange;
+                if (grabbableItemInRange != null) {
+                    currentGrabbedItem = grabbableItemInRange;
+                    if (playerController.lockedObjectInReach) {
+                        playerController.audioSource.PlayOneShot(lockedObjectSound);
+                    } else {
+                        playerController.audioSource.PlayOneShot(grabItemSound);
+                    }
+                }
             } else if (Vector3.Distance(currentGrabbedItem.transform.position, transform.position) > dropGrabbedItemRange) {
                 // Drop if item if to far away
+                playerController.audioSource.PlayOneShot(dropObjectSound);
                 currentGrabbedItem = null;
             }
-        } else {
+        } else if (currentGrabbedItem != null) {
+            // Drop item
+            playerController.audioSource.PlayOneShot(dropObjectSound);
             currentGrabbedItem = null;
         }
     }
